@@ -1,0 +1,31 @@
+<div class="row"> 
+    @for (item of productList; track 'productId') {
+    <div class="col-3">
+        <div class="box-shadow">
+            <div class="card mt-2">
+                <img class="img-fluid" [src]="item.productImageUrl" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{item.productShortName}}</h5>
+                    <p class="card-text"><span class="text-danger fw-semibold me-2">$ {{item.productPrice}}</span>
+                        <span class="text-success ms-2">35% Off</span>
+                    </p>
+                    <div class="row">
+                        <div class="col-6">
+                            <span><i class="fa-solid fa-star  m-0" style="color: #f1f50f;"></i></span>
+                            <span><i class="fa-solid fa-star  m-0" style="color: #f1f50f;"></i></span>
+                            <span><i class="fa-solid fa-star-half-stroke  m-0" style="color: #f1f50f;"></i></span>
+                            <span class="text-muted">(25)</span>
+                        </div>
+                        <div class="col-6">
+                            <p class="text-end pb-0 mb-0"><button class="btn  text-end btn-sm btn-success p-2"><i
+                                        class="fa-solid fa-cart-plus fs-5" style="color: #0c0d0d;"></i></button></p>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    } 
+</div>
