@@ -4,11 +4,19 @@
         <div class="box-shadow">
             <div class="card mt-2">
                 <img class="img-fluid" [src]="item.productImageUrl" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{item.productShortName}}</h5>
-                    <p class="card-text"><span class="text-danger fw-semibold me-2">$ {{item.productPrice}}</span>
-                        <span class="text-success ms-2">35% Off</span>
-                    </p>
+                <div class="card-body p-1">
+                    <div class="row">
+                        <div class="col-8">
+                            <h5 class="card-title" title="{{item.productShortName}}">{{item.productShortName}}</h5>
+                        </div>
+                        <div class="col-4 text-end">
+                            <p class="card-text"><span class="text-danger fw-semibold me-2">$ {{item.productPrice}}</span>
+                                
+                            </p>
+                        </div>
+                    </div>
+                   
+                  
                     <div class="row">
                         <div class="col-6">
                             <span><i class="fa-solid fa-star  m-0" style="color: #f1f50f;"></i></span>

@@ -20,7 +20,12 @@
 a:hover {
     color: red !important;
 }
-
+.card-title {
+    white-space: nowrap; 
+  width: 100%; 
+  overflow: hidden;
+  text-overflow: ellipsis;  
+}
 .dropdown:hover .dropdown-menu {
     display: block !important;
     margin-top: 0;
@@ -115,7 +120,7 @@ a:hover {
 /* login */
 img {
     margin: 0 auto;
-    display: block;
-    margin-top: 20%;
+    display: block; 
+    height: 170px;
   }
   
