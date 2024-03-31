@@ -17,3 +17,11 @@ export interface APIResponseModel {
   result: boolean
   data: any;
 }
+
+export interface CategoryModel { 
+  categoryId: number
+  categoryName: string
+  parentCategoryId: number;
+}
+
+ 
