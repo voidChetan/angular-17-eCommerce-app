@@ -2,11 +2,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { ProductService } from '../../core/services/product.service';
 import { APIResponseModel, IProduct } from '../../core/model/Model';
+import { LazyImageDirective } from '../../shared/directive/lazy-image.directive';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [HttpClientModule],
+  imports: [HttpClientModule, LazyImageDirective],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
 })

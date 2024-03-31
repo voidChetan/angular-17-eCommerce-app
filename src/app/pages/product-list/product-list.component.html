@@ -1,9 +1,16 @@
+<div class="row">
+    <div class="col-12 text-center p-2">
+        <h4>All Products</h4>
+    </div>
+</div>
+
 <div class="row"> 
     @for (item of productList; track 'productId') {
     <div class="col-3">
         <div class="box-shadow">
             <div class="card mt-2">
-                <img class="img-fluid" [src]="item.productImageUrl" class="card-img-top" alt="...">
+                <!-- <img class="img-fluid" [src]="item.productImageUrl" class="card-img-top" alt="..."> -->
+                <img class="img-fluid" appLazyImage [attr.data-src]="item.productImageUrl" src="" class="card-img-top" alt="...">
                 <div class="card-body p-1">
                     <div class="row">
                         <div class="col-8">
