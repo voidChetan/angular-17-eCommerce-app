@@ -57,42 +57,30 @@
                             <i class="fa fa-cart-shopping fs-5 me-1" style="color: #202122;"></i>
                         </a>
                         <ul class="dropdown-menu menuOnLeft   rounded-0 mt-2" aria-labelledby="navbarDropdown3">
-                            <li class="p-2">
-                                <div class="d-flex w-100 border-bottom justify-content-evenly">
-                                    <div>
-                                        <img style="height: 70px !important;width: 100px !important;"
-                                            class="img-fluid     p-2" src="product_img/cartImg1.jfif" alt="">
+                            @for (item of cartData; track $index) {
+                                <li class="p-2" >
+                                    <div class="d-flex w-100 border-bottom justify-content-evenly">
+                                        <div>
+                                            <img style="height: 70px !important;width: 100px !important;"
+                                                class="img-fluid     p-2" [src]="item.productImageUrl" alt="">
+                                        </div>
+    
+    
+                                        <div style="">
+                                            <a href="#" class="text-decoration-none text-black fw-semibold">
+                                                <p class="m-0 p-0">{{item.productShortName}}</p>
+                                            </a>
+                                            <p>1 <i class="fa-solid fa-xmark" style="color: #0d0d0d;"></i> $ {{item.productPrice}}</p>
+                                        </div>
+                                        <button type="button" class="btn fs-5 closeBtn" (click)="removeCartProduct(item.cartId)"><i
+                                                class="fa-solid fa-xmark"></i></button>
                                     </div>
+    
+                                </li>
 
-
-                                    <div style="">
-                                        <a href="#" class="text-decoration-none text-black fw-semibold">
-                                            <p class="m-0 p-0">Varibale Product 001</p>
-                                        </a>
-                                        <p>1 <i class="fa-solid fa-xmark" style="color: #0d0d0d;"></i> $ 78.00</p>
-                                    </div>
-                                    <button type="button" class="btn fs-5 closeBtn"><i
-                                            class="fa-solid fa-xmark"></i></button>
-                                </div>
-
-                            </li>
-                            <li class="p-2">
-                                <div class="d-flex w-100 border-bottom justify-content-evenly">
-
-                                    <img style="height: 70px !important;width: 100px !important;" class="img-fluid  p-2"
-                                        src="product_img/cartImg2.jfif" alt="">
-                                    <div>
-                                        <a href="#" class="text-decoration-none text-black fw-semibold">
-                                            <p class="m-0 p-0">Ornare consequat</p>
-                                        </a>
-                                        <p>1 <i class="fa-solid fa-xmark" style="color: #0d0d0d;"></i> $ 81.00</p>
-                                    </div>
-
-                                    <button type="button" class="btn fs-5 closeBtn"><i
-                                            class="fa-solid fa-xmark"></i></button>
-
-                                </div>
-                            </li>
+                            }
+                           
+                           
                             <li class="p-2">
                                 <div class=" w-100 ">
                                     <div class="d-flex justify-content-between">
@@ -169,13 +157,13 @@
                         <input type="text" [(ngModel)]="userRegister.Name" class="form-control">
                     </div>
                     <div class="col-4">
-                        <label for="">Name</label>
+                        <label for="">Mobile No</label>
                         <input type="text" [(ngModel)]="userRegister.MobileNo" class="form-control">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-4">
-                        <label for="">Name</label>
+                        <label for="">Password</label>
                         <input type="text" [(ngModel)]="userRegister.Password" class="form-control">
                     </div>
                 </div>

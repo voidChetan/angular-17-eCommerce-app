@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 import { APIResponseModel } from '../model/Model';
 
 @Injectable({
@@ -9,6 +9,8 @@ import { APIResponseModel } from '../model/Model';
 export class ProductService {
 
   apiUrl: string = 'https://freeapi.gerasim.in/api/BigBasket/';
+
+  onCartUpdated$: Subject<boolean> = new Subject<boolean>()  ;
 
   constructor(private http: HttpClient) { }
 
@@ -32,6 +34,17 @@ export class ProductService {
   onLogin (obj: any): Observable<APIResponseModel>{
     return this.http.post<APIResponseModel>(`${this.apiUrl}login`, obj);
   } 
+ 
+  onAddToCart (obj: any): Observable<APIResponseModel>{
+    return this.http.post<APIResponseModel>(`${this.apiUrl}AddToCart`, obj);
+  } 
 
+  getCartDataByCustId (custId: number): Observable<APIResponseModel>{
+    return this.http.get<APIResponseModel>(`${this.apiUrl}GetCartProductsByCustomerId?id=${custId}`);
+  } 
+ 
+  removeProduct (cartId: number): Observable<APIResponseModel>{
+    return this.http.get<APIResponseModel>(`${this.apiUrl}DeleteProductFromCartById?id=${cartId}`);
+  } 
 
 }

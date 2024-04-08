@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { ProductService } from '../../core/services/product.service';
-import { APIResponseModel, CategoryModel, IProduct } from '../../core/model/Model';
+import { APIResponseModel, CartClass, CategoryModel, IProduct } from '../../core/model/Model';
 import { LazyImageDirective } from '../../shared/directive/lazy-image.directive';
 import { Observable } from 'rxjs';
 import { AsyncPipe, CommonModule } from '@angular/common';
@@ -20,10 +20,20 @@ categoryList$: Observable<APIResponseModel> | undefined;
 
 productService = inject(ProductService);
 
+cartObj: CartClass = new CartClass();
+
+loggedUserId: number = 0;
 
 ngOnInit(): void {
   debugger;
   this.getAllProduct();
+  const loggedUser = localStorage.getItem('ecomUser');
+  debugger;
+  if(loggedUser != null) {
+    const parseData = JSON.parse(loggedUser);
+    this.loggedUserId = parseData.custId;
+
+  }
    
   this.categoryList$ =  this.productService.getAllcategory();
 }
@@ -34,6 +44,22 @@ getProductByCategory(cateId: number) {
   })
 }
 
+addToCart(productId: number) {
+  debugger;
+  this.cartObj.ProductId  = productId;
+  this.cartObj.CustId = this.loggedUserId;
+  this.cartObj.Quantity = 1;
+  this.productService.onAddToCart(this.cartObj).subscribe((res: APIResponseModel)=>{
+    debugger;
+    if(res.result) {
+      alert('Product Added to Cart');
+      this.productService.onCartUpdated$.next(true);
+    } 
+  },error=> {
+    debugger;
+    alert("Error From API")
+  })
+}
  
 
 getAllProduct() {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component , OnInit} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { ProductService } from './core/services/product.service';
@@ -10,7 +10,7 @@ import { ProductService } from './core/services/product.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent  implements OnInit{
   userRegister: any = {
     "CustId": 0,
     "Name": "",
@@ -22,14 +22,47 @@ export class AppComponent {
     "UserPassword": "string"
   }
 
+  cartData: any []= [];
   loggedUSerData: any;
   constructor(private productSr:ProductService) {
     const localData = localStorage.getItem('ecomUser');
     if(localData != null) {
       this.loggedUSerData = JSON.parse(localData)
     }
+    this.productSr.onCartUpdated$.subscribe(res=>{
+      if(res) {
+        this.getCart();
+      }
+      debugger;
+     
+    })
   }
 
+  ngOnInit(): void {
+    this.getCart();
+  }
+
+
+  getCart() {
+    this.productSr.getCartDataByCustId(this.loggedUSerData.custId).subscribe((res:any)=>{
+      if(res.result) {
+        this.cartData =  res.data;
+      } else{
+        alert(res.message)
+      }
+    })
+  }
+
+  removeCartProduct(cartId: number) {
+    debugger;
+    this.productSr.removeProduct(cartId).subscribe((res:any)=>{
+      if(res.result) {
+        this.getCart();
+      } else{
+        alert(res.message)
+      }
+    })
+  }
   onRegister() {
     this.productSr.onRegister(this.userRegister).subscribe((res:any)=>{
       if(res.result) {
